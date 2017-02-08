@@ -31,7 +31,7 @@ class LSTM(sobamchan_chainer.Model):
         c = Variable(np.zeros((1, k), dtype=np.float32))
         for i in range(len(s)-1):
             next_word_id = s[i+1]
-            tx = Variable(np.array([next_word_id], dtype=np.int32))
+            tx = self.prepare_input([next_word_id], dtype=np.int32)
             x_k = self.embed(self.prepare_input([s[i]], dtype=np.int32))
             _z = self.Wz(x_k) + self.Rz(h)
             z = F.tanh(_z)
